@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadets</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 8px;
+        }
+
+        button {
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+
+        a {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Cadets</h1>
+
+    <form method="GET" action="/cadets">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search by name"
+            value="{{ search }}"
+        >
+
+        <button type="submit">
+            Search
+        </button>
+
+        <a href="/cadets">
+            Clear
+        </a>
+
+    </form>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>AS Class</th>
+            <th>Major</th>
+            <th>Flight</th>
+            <th>Status</th>
+        </tr>
+
+        {% for cadet in cadets %}
+
+        <tr>
+            <td>{{ cadet["CadetID"] }}</td>
+
+            <td>
+                <a href="/cadets/{{ cadet['CadetID'] }}">
+                    {{ cadet["FirstName"] }}
+                    {{ cadet["LastName"] }}
+                </a>
+            </td>
+
+            <td>{{ cadet["ASClass"] }}</td>
+
+            <td>{{ cadet["Major"] }}</td>
+
+            <td>
+                {% if cadet["FlightName"] %}
+                    {{ cadet["FlightName"] }}
+                {% else %}
+                    Not Assigned
+                {% endif %}
+            </td>
+
+            <td>
+                {% if cadet["ActiveStatus"] == 1 %}
+                    Active
+                {% else %}
+                    Inactive
+                {% endif %}
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <p>
+        <a href="/">Back to Home</a>
+    </p>
+
+</body>
+</html>

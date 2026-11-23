@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadet Readiness Report</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        .warning {
+            background-color: #f8d7da;
+        }
+
+        .good {
+            background-color: #d4edda;
+        }
+
+        a {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Cadet Readiness Report</h1>
+
+    <p>
+        This report summarizes each cadet's recorded attendance.
+        Present and Late records count as attended.
+    </p>
+
+    <table>
+
+        <tr>
+            <th>Cadet</th>
+            <th>Flight</th>
+            <th>Events Recorded</th>
+            <th>Events Attended</th>
+            <th>Attendance %</th>
+        </tr>
+
+        {% for cadet in readiness %}
+
+        <tr
+            {% if cadet["AttendancePercentage"] is not none
+                  and cadet["AttendancePercentage"] < 90 %}
+                class="warning"
+            {% elif cadet["AttendancePercentage"] is not none %}
+                class="good"
+            {% endif %}
+        >
+
+            <td>
+                {{ cadet["FirstName"] }}
+                {{ cadet["LastName"] }}
+            </td>
+
+            <td>
+                {% if cadet["FlightName"] %}
+                    {{ cadet["FlightName"] }}
+                {% else %}
+                    Not Assigned
+                {% endif %}
+            </td>
+
+            <td>
+                {{ cadet["EventsRecorded"] }}
+            </td>
+
+            <td>
+                {{ cadet["EventsAttended"] }}
+            </td>
+
+            <td>
+                {% if cadet["AttendancePercentage"] is not none %}
+                    {{ cadet["AttendancePercentage"] }}%
+                {% else %}
+                    No Data
+                {% endif %}
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <p>
+        <a href="/">Back to Home</a>
+    </p>
+
+</body>
+</html>

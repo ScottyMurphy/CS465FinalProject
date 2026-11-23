@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cadet Details</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 6px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        a {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>
+        {{ cadet["FirstName"] }}
+        {{ cadet["LastName"] }}
+    </h1>
+
+    <div class="card">
+        <h2>Cadet Information</h2>
+
+        <p><strong>Cadet ID:</strong> {{ cadet["CadetID"] }}</p>
+        <p><strong>AS Class:</strong> {{ cadet["ASClass"] }}</p>
+        <p><strong>Email:</strong> {{ cadet["Email"] }}</p>
+        <p><strong>Major:</strong> {{ cadet["Major"] }}</p>
+
+        <p>
+            <strong>Flight:</strong>
+
+            {% if cadet["FlightName"] %}
+                {{ cadet["FlightName"] }}
+            {% else %}
+                Not Assigned
+            {% endif %}
+        </p>
+
+        <p>
+            <strong>Status:</strong>
+
+            {% if cadet["ActiveStatus"] == 1 %}
+                Active
+            {% else %}
+                Inactive
+            {% endif %}
+        </p>
+    </div>
+
+    <h2>Fitness Assessments</h2>
+
+    {% if fitness %}
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Pushups</th>
+            <th>Situps</th>
+            <th>Run Time</th>
+            <th>Score</th>
+        </tr>
+
+        {% for assessment in fitness %}
+        <tr>
+            <td>{{ assessment["AssessmentDate"] }}</td>
+            <td>{{ assessment["Pushups"] }}</td>
+            <td>{{ assessment["Situps"] }}</td>
+            <td>{{ assessment["RunTime"] }} sec</td>
+            <td>{{ assessment["Score"] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% else %}
+
+    <p>No fitness assessments recorded.</p>
+
+    {% endif %}
+
+    <h2>Leadership Positions</h2>
+
+    {% if positions %}
+
+    <table>
+        <tr>
+            <th>Position</th>
+            <th>Semester</th>
+            <th>Position Scope</th>
+            <th>Start</th>
+            <th>End</th>
+        </tr>
+
+        {% for position in positions %}
+        <tr>
+            <td>{{ position["PositionName"] }}</td>
+            <td>{{ position["Semester"] }}</td>
+
+            <td>
+                {% if position["FlightName"] %}
+                    {{ position["FlightName"] }}
+                {% else %}
+                    Wing-Level
+                {% endif %}
+            </td>
+
+            <td>{{ position["StartDate"] }}</td>
+
+            <td>
+                {% if position["EndDate"] %}
+                    {{ position["EndDate"] }}
+                {% else %}
+                    Current
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% else %}
+
+    <p>No leadership positions recorded.</p>
+
+    {% endif %}
+
+    <p>
+        <a href="/cadets">Back to Cadets</a>
+    </p>
+
+    <p>
+        <a href="/">Home</a>
+    </p>
+
+</body>
+</html>

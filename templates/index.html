@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AFROTC Tracker</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #222;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            gap: 12px;
+        }
+
+        .menu a {
+            padding: 15px;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .menu a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>AFROTC Cadet Training and Readiness Tracker</h1>
+
+    <p>Select an operation:</p>
+
+    <div class="menu">
+
+        <a href="/cadets">
+            View / Search Cadets
+        </a>
+        
+        <a href="/events/add">
+            Add Training Event
+        </a>
+
+        <a href="/attendance">
+            Record Attendance
+        </a>
+
+        <a href="/cadets/update-flight">
+            Update Cadet Flight
+        </a>
+
+        <a href="/readiness">
+            Readiness Report
+        </a>
+
+        <a href="/fitness">
+            Fitness History
+        </a>
+
+    </div>
+
+</body>
+</html>
