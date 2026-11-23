@@ -19,12 +19,16 @@
         .read schema.sql
     c. Run:
         .read insert_data.sql  
+    SQLite stores the database in a local file afrotc.db 
+    no separate database server, account, or password is required.
 
 #Running the Application
 1. Open terminal in the project directory
-2. Run:
+2. Install flask:
+    python -m pip install flask
+3. Run:
     python app.py
-3. The server will start, open a web broswe and go to:
+4. The server will start, open a web browse and go to:
     http://127.0.0.1:5000
 
 
@@ -83,6 +87,13 @@ User input validation is used before database operations. Including:
 3. Cadet IDs 
 4. Flight ID 
 Errors are handled with error messages, not database errors.
+
+#Known Limitations
+1. The application has no known limitations other than certain operations
+such as reporting attendance can be tedious. In future development I would 
+make the application able to report multiple cadets at once to improve user
+experience.
+
 
 
 
